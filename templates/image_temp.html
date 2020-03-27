@@ -7,9 +7,8 @@
     <title>Campaign</title>
 </head>
 <body>
-    <img src="{% static 'Images/image_'%}{{ pages }}.png" "alt="nothing found">
-    <img src="{% static "Images/image_101.png" %}" alt="nothing found">
-    <p>the {{ pages }} is here</p>
-
+    {% for key, value in data.items %}
+        <img src="{% static 'Images/image_'%}{{ value }}.png" "alt="nothing found">
+    {% endfor %}
 </body>
 </html>
