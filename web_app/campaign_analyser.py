@@ -1,7 +1,7 @@
 import pandas as pd
 
-clicks_1 = pd.read_csv("Data/1/clicks_1.csv")
 
+# Function to determine how many positive values we have in our data series, both for revenue and clicks
 
 def number_of_rev(series):
     m = 0
@@ -32,7 +32,9 @@ def banner_list_generator(camp_id, minute, banners_visited):
         conversion_1 = pd.read_csv("Data/4/conversions_4.csv")
         impressions_1 = pd.read_csv("Data/4/impressions_4.csv")
 
+    # Merging clicks and revenue datasets
     total_1 = pd.merge(clicks_1, conversion_1, how='left', on='click_id')
+
     # Creating sorted series of banners based on revenues
     banner_rev = total_1[total_1['campaign_id'] == camp_id].groupby('banner_id')['revenue'].sum().sort_values(
         ascending=False)
@@ -41,43 +43,47 @@ def banner_list_generator(camp_id, minute, banners_visited):
 
     # Creating sorted series of banners based on clicks
     banner_click = total_1[total_1['campaign_id'] == camp_id].groupby('banner_id')['click_id'].count().sort_values(
-        ascending=False)[:10]
+        ascending=False)
     click_banners_num = number_of_rev(banner_click)
     banner_click_only = banner_click[:click_banners_num].index
 
     # Creating list of banners for each campaign, regardless of click or revenue
     banners_list = impressions_1[impressions_1['campaign_id'] == camp_id]['banner_id'].index
 
+    # When our campaign has 10 or more banners with revenue
     if revenue_banners_num >= 10:
         banners_tobe_shown = []
+        # First choose banners with highest revs
         for banner in banner_rev_only:
             if banner not in banners_visited:
                 banners_tobe_shown.append(banner)
                 if len(banners_tobe_shown) == 10:
                     break
         if len(banners_tobe_shown) < 10:
+            # If our list is not filled, fill it with banners with most clicks
             for banner in banner_click_only:
                 if banner not in banners_visited:
                     banners_tobe_shown.append(banner)
                     if len(banners_tobe_shown) == 10:
                         break
             if len(banners_tobe_shown) < 10:
+                # If our list is not filled, filled it with random banners within that campaign
                 for banner in banners_list:
                     if banner not in banners_visited:
                         banners_tobe_shown.append(banner)
                         if len(banners_tobe_shown == 10):
                             break
         return banners_tobe_shown
-
+    # When our campaign has 5 to 10 banners with revenue
     if (revenue_banners_num < 10) and (revenue_banners_num > 4):
         banners_tobe_shown = []
-        #Fill the list with most revenue in that campaign
+        # Fill the list with most revenue in that campaign
         for banner in banner_rev_only:
             if banner not in banners_visited:
                 banners_tobe_shown.append(banner)
                 if len(banners_tobe_shown) == revenue_banners_num:
                     break
-        #If not fulled, fill with most clicked in that campaign
+        # If not filled, fill with most clicked in that campaign
         if len(banners_tobe_shown) < revenue_banners_num:
             for banner in banner_click_only:
                 if banner not in banners_visited:
@@ -85,32 +91,34 @@ def banner_list_generator(camp_id, minute, banners_visited):
                     if len(banners_tobe_shown) == revenue_banners_num:
                         break
             if len(banners_tobe_shown) < revenue_banners_num:
+                # If our list is not filled, filled it with random banners within that campaign
                 for banner in banners_list:
                     if banner not in banners_visited:
                         banners_tobe_shown.append(banner)
                         if len(banners_tobe_shown == revenue_banners_num):
                             break
         return banners_tobe_shown
-
+    # When our campaign has less than 5 banners with Rev
     if revenue_banners_num < 5:
         banners_tobe_shown = []
+        # Fill the list with most revenue in that campaign
         for banner in banner_rev_only:
             if banner not in banners_visited:
                 banners_tobe_shown.append(banner)
                 if len(banners_tobe_shown) == 5:
                     break
         if len(banners_tobe_shown) < 5:
+            # If not filled, fill with most clicked in that campaign
             for banner in banner_click_only:
                 if banner not in banners_visited:
                     banners_tobe_shown.append(banner)
                     if len(banners_tobe_shown) == 5:
                         break
+            # If our list is not filled, filled it with random banners within that campaign
             if len(banners_tobe_shown) < 5:
                 for banner in banners_list:
                     if banner not in banners_visited:
                         banners_tobe_shown.append(banner)
-                        if len(banners_tobe_shown == 5):
+                        if len(banners_tobe_shown) == 5:
                             break
         return banners_tobe_shown
-
-
