@@ -8,7 +8,12 @@
 </head>
 <body>
     {% for key, value in data.items %}
-        <img src="{% static 'Images/image_'%}{{ value }}.png" "alt="nothing found">
+        <p>
+            <a href="/customer_website/{{ value }}">
+                <img src="{% static 'Images/image_'%}{{ value }}.png" "alt="nothing found" width="62" height="62">
+             </a>
+        </p>
+
     {% endfor %}
 </body>
 </html>

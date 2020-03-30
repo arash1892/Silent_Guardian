@@ -13,6 +13,8 @@ def number_of_rev(series):
     return m
 
 
+# Function to return the list of banners to be shown to User
+
 def banner_list_generator(camp_id, minute, banners_visited):
     # Loading dataset
     if minute < 15:
@@ -71,7 +73,7 @@ def banner_list_generator(camp_id, minute, banners_visited):
                 for banner in banners_list:
                     if banner not in banners_visited:
                         banners_tobe_shown.append(banner)
-                        if len(banners_tobe_shown == 10):
+                        if len(banners_tobe_shown) == 10:
                             break
         return banners_tobe_shown
     # When our campaign has 5 to 10 banners with revenue
@@ -95,7 +97,7 @@ def banner_list_generator(camp_id, minute, banners_visited):
                 for banner in banners_list:
                     if banner not in banners_visited:
                         banners_tobe_shown.append(banner)
-                        if len(banners_tobe_shown == revenue_banners_num):
+                        if len(banners_tobe_shown) == revenue_banners_num:
                             break
         return banners_tobe_shown
     # When our campaign has less than 5 banners with Rev
