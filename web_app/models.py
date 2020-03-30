@@ -14,3 +14,10 @@ class User_Banners_Visited(models.Model):
 class User_Banner_Clicked(models.Model):
     user_id_session = models.CharField(max_length=255)
     banner_clicked = models.IntegerField()
+
+
+class Clicks_Duplication(models.Model):
+    click_id = models.IntegerField()
+    banner_id = models.IntegerField()
+    campaign_id = models.IntegerField()
+
