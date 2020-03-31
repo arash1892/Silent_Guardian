@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'banners',
         'USER': 'data',
         'PASSWORD': 'chef',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '',
     }
 }

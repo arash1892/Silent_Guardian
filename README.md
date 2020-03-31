@@ -4,14 +4,15 @@
 
 ## Running Locally
 You can run it as below on your local:
+
+Install Docker & Docker Compose
+
 ```
-pip install -r requirements.txt
-python manage.py runserver
+docker-compose up
 ```
 
 Web app is available at: _localhost/campaigns/{campaign_id}
 
-(Docker had some bugs and couldnt be run properly due to not connecting to db.)_
 
 ## Tests
 ```
