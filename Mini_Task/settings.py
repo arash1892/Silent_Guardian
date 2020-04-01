@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'Mini_Task.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'banners',
-        'USER': 'data',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
         'PASSWORD': 'chef',
         'HOST': 'db',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 

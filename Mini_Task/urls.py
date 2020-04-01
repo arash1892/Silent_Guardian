@@ -15,14 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from web_app.views import index, redirection
+from web_app.views import index, redirection, pagetest
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('campaigns/<int:campaign_id>',index),
-    path('customer_website/<int:banner_id>', redirection)
+    path('customer_website/<int:banner_id>', redirection),
+    path('test',pagetest)
 ]
 
 urlpatterns += staticfiles_urlpatterns()
